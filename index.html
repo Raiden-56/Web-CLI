@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="markdowns.css">
+    <title>🖥️ CLI</title>
+    <noscript>Please Enable Javascript if it's not.</noscript>
+</head>
+
+<body>
+
+    <div id="window">
+        <div class="window-header">
+            <div class="header-title">CLI</div>
+            <div class="header-buttons">
+                <div class="header-button"></div>
+                <div class="header-button"></div>
+                <div class="header-button"></div>
+            </div>
+        </div>
+        <div id="lines">
+        </div>
+        <textarea class="window-textarea" oninput="this.value = this.value.replace(/\n/g,'')" id="textarea"></textarea>
+    </div>
+
+    <script src="js/commands.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

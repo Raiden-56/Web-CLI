@@ -3,8 +3,8 @@ const commands = [
         name: "help",
         run: (client, args) => {
             client.print(client.color.underline(client.color.green("Commands")));
-            client.print(client.color.orange("clear"), ": clear the CLI");
-            client.print(client.color.orange("pow"), ": Ask for a numer and return his power");
+            client.print(client.color.orange("clear:"), "Clear the CLI");
+            client.print(client.color.orange("pow:"), "Ask for a numer and return his power");
         }
     },
     {

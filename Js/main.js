@@ -22,7 +22,20 @@ class Window {
             clear: this.clear,
             color: this.textProps,
         };
-        
+        this.init();
+    }
+
+    init() {
+        document.getElementById("title").innerHTML = this.options.Title;
+        this.options.Buttons.forEach(({ icon, onClick }, i) => {
+            document.getElementById("buttons").innerHTML += `<div class="header-button" id="headerButton${i}"></div>`;
+            document.getElementById(`headerButton${i}`).addEventListener("click", onClick);
+        });
+        document.getElementById("prefix").innerHTML = this.options.Prefix;
+        textarea.focus();
+        document.getElementById("window").addEventListener("click", () => {
+            textarea.focus();
+        })
     }
 
     spawn() {
@@ -32,7 +45,7 @@ class Window {
             /*CLI Haler*/
             const lastLine = textarea.value.split("\n").pop();
             textarea.value = null;
-            this.print(lastLine);
+            this.print(this.options.Prefix + lastLine);
 
             /*Check if the user is Scanning, and if it is we don't run the commands*/
             if (this.isScanning) return;
@@ -41,24 +54,29 @@ class Window {
             const args = lastLine.split(" ");
             const commandName = args.shift();
             const command = commands.filter(({ name }) => name === commandName)[0];
-            /*Text Command is SHowing while scanning*/
             if (!command) return this.print(this.options.TextError || "Unvailable Command !");
             await command.run(this.client, args);
         });
     }
 
+    kill() {
+        
+    }
+
     scan = async () => {
         this.isScanning = true;
+        document.getElementById("prefix").style.display = "none";
         return new Promise((resolve, reject) => {
             document.addEventListener("keypress", ({ keyCode }) => {
                 if (keyCode !== 13) return;
 
-                const result = Object.values(lines.children).at(-1).innerHTML;
+                const result = Object.values(lines.children).at(-1).innerHTML.split(this.options.Prefix)[1];
 
                 resolve(result);
             });
         }).finally((r) => {
-            this.isScanning = false
+            this.isScanning = false;
+            document.getElementById("prefix").style.display = "block";
             return r;
         });
     };
